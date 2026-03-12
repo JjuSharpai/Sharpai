@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SharpAI.Application/SharpAI.Application.csproj" />
+    <Project Path="src/SharpAI.Domain/SharpAI.Domain.csproj" />
+    <Project Path="src/SharpAI.Infrastructure/SharpAI.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SharpAI.Tests/SharpAI.Tests.csproj" />
+  </Folder>
+</Solution>
