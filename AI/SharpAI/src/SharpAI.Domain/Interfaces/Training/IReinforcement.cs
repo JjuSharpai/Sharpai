@@ -1,6 +1,6 @@
-namespace SharpAI.Domain.Interfaces;
+namespace SharpAI.Domain.Interfaces.Training;
 
-public interface IReinforcementLearner
+public interface IReinforcement
 {
     int SelectAction(double[] state);
     void Update(double[] state, int action, double reward, double[] nextState, bool done);

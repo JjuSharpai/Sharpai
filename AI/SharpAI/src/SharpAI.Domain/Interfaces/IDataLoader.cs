@@ -4,6 +4,6 @@ namespace SharpAI.Domain.Interfaces;
 
 public interface IDataLoader
 {
-    Task<DataSet> LoadAsync();
-    string Name { get; }
+    Task<DataSet> LoadAsync(string url, Func<string[], (double[] Features, double Label)> parser,
+        char separator = ',', bool hasHeader = false);
 }

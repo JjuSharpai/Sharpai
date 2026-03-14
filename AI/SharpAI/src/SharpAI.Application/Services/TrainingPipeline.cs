@@ -1,15 +1,16 @@
 using SharpAI.Domain.Interfaces;
+using SharpAI.Domain.Interfaces.Training;
 using SharpAI.Domain.Models;
 
 namespace SharpAI.Application.Services;
 
 public class TrainingPipeline
 {
-    public PredictionResult RunSupervised(ISupervisedLearner learner, DataSet trainingSet, DataSet testSet)
+    public PredictionResult RunSupervised(ISupervised learner, DataSet trainingSet, DataSet testSet)
     {
-        var model = learner.Train(trainingSet.Features, trainingSet.Labels!);
-        var predictions = model.Predict(testSet.Features);
-        var accuracy = learner.Evaluate(model, testSet.Features, testSet.Labels!);
+        learner.Train(trainingSet.Features, trainingSet.Labels!);
+        var predictions = learner.Predict(testSet.Features);
+        var accuracy = learner.Evaluate(testSet.Features, testSet.Labels!);
 
         return new PredictionResult
         {
@@ -18,15 +19,15 @@ public class TrainingPipeline
         };
     }
 
-    public PredictionResult RunUnsupervised(IUnsupervisedLearner learner, DataSet dataSet)
+    public PredictionResult RunUnsupervised(IUnsupervised learner, DataSet dataSet)
     {
-        var model = learner.Train(dataSet.Features);
-        var assignments = model.Predict(dataSet.Features);
+        learner.Train(dataSet.Features);
+        var assignments = learner.Predict(dataSet.Features);
 
         return new PredictionResult { Predictions = assignments };
     }
 
-    public void RunReinforcement(IReinforcementLearner agent, IEnvironment env, int episodes)
+    public void RunReinforcement(IReinforcement agent, IEnvironment env, int episodes)
     {
         for (int ep = 0; ep < episodes; ep++)
         {
